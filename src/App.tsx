@@ -2,41 +2,38 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
-// Git 연결
-// Route, navigate 등
-// Redux
-// style-components
-// bootstrap
-// MUI
-// Lottie
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const navigate = useNavigate()
+
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path='/' element={
+          <h1>main page</h1>
+        }/>
+        <Route path='/drink-info' element={
+          <h1>어떤 술인지 정보</h1>
+        }/>
+        <Route path='/drink-similar' element={
+          <div>
+            <h1>비슷한 술 추천</h1>
+            <button onClick={() => navigate('/') }>메인으로</button>
+          </div>
+        }/>
+        <Route path='/drink-food' element={
+          <div>
+            <h1>안주 추천</h1>
+            <button onClick={() => navigate('/drink-info') }>술 정보 보기</button>
+          </div>
+        }/>
+      </Routes>
     </div>
   )
 }
